@@ -1,0 +1,100 @@
+          2   3     2   2
+ideal (x*z , y , y*z , x y)
+          2   3   2      2
+ideal (y*z , x , y z, x*y )
+               3     2   2
+ideal (x*y*z, z , y*z , y z)
+        3   2    3     2
+ideal (x , y z, z , y*z )
+               2    3     2
+ideal (x*y*z, x y, x , y*z )
+          2   2    2      2
+ideal (x*y , y z, x y, y*z )
+        3   2    3   2
+ideal (z , x y, x , x z)
+          2     2   3   3
+ideal (x*y , y*z , y , z )
+        3   2    2    3
+ideal (z , y z, x y, y )
+          2   3          3
+ideal (x*y , z , x*y*z, x )
+        3     2   3   3
+ideal (y , x*z , x , z )
+        3   3   2      2
+ideal (y , z , x z, y*z )
+          2   2    3
+ideal (x*y , x z, x , x*y*z)
+        2             2     2
+ideal (y z, x*y*z, y*z , x*y )
+        3     2   2    2
+ideal (x , x*z , x y, x z)
+        3     2   3   2
+ideal (y , x*y , x , y z)
+          2   2    2    3
+ideal (x*z , y z, x y, y )
+          2          2      2
+ideal (y*z , x*y*z, x y, x*z )
+               2      2   3
+ideal (x*y*z, x y, y*z , x )
+               3   2      2
+ideal (x*y*z, x , x y, x*y )
+        2           3     2
+ideal (x y, x*y*z, y , y*z )
+        2      2   2
+ideal (y z, x*z , x z, x*y*z)
+        2    2    3     2
+ideal (x z, y z, y , y*z )
+               3     2   2
+ideal (x*y*z, y , x*y , x y)
+        2      2   3   3
+ideal (x y, y*z , z , y )
+        2    3     2     2
+ideal (x y, x , x*z , x*y )
+        2    3   2    3
+ideal (x z, z , x y, y )
+          2   2    2
+ideal (x*y , x y, x z, x*y*z)
+          2          3     2
+ideal (x*y , x*y*z, z , y*z )
+          2     2   3   3
+ideal (x*z , x*y , x , z )
+          2     2   2    3
+ideal (y*z , x*z , x z, y )
+          2   3   3     2
+ideal (x*z , y , z , x*y )
+        2    3   2      2
+ideal (x y, y , x z, x*z )
+        3   3   2    2
+ideal (y , x , x z, x y)
+        2             2     2
+ideal (y z, x*y*z, x*z , y*z )
+        2    2    2
+ideal (y z, x z, x y, x*y*z)
+          2   2    3     2
+ideal (y*z , y z, y , x*z )
+          2   3     2   2
+ideal (y*z , y , x*y , x z)
+        3   3   2    2
+ideal (x , y , x z, x y)
+        2      2          2
+ideal (x y, y*z , x*y*z, x z)
+          2   3   2    2
+ideal (x*y , z , x z, y z)
+          2     2   3   3
+ideal (x*y , y*z , z , y )
+               2    3   3
+ideal (x*y*z, x z, x , y )
+                 2     2   3
+ideal (x*y*z, x*y , y*z , x )
+               3     2   2
+ideal (x*y*z, y , y*z , y z)
+        2    2    2      2
+ideal (y z, x y, x z, x*z )
+        3   2    3   2
+ideal (y , x z, x , y z)
+        3   3   3   2
+ideal (x , y , z , x z)
+        3     2          2
+ideal (x , x*y , x*y*z, x z)
+        2    3            2
+ideal (x z, z , x*y*z, x*y )
