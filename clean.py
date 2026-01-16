@@ -1,9 +1,12 @@
 """
-Docstring for clean
+Read ideals from Macaulay2 output and encode into matrices
 """
 
+import re
+from typing import Iterable, Tuple, List
 
-def clean_ideal(powers: list, terms: list):
+
+def m2_to_str(powers: list[str], terms: list[str]):
     """
     Accepts a list of exponents and list of variables and merges the two into an easier format to work with
 
@@ -44,14 +47,54 @@ def clean_ideal(powers: list, terms: list):
     return tmp_ideal
 
 
-if __name__ == "__main__":
+def monomial_to_expvec(m: str, variables: Iterable[str] = ("x", "y", "z")) -> List[int]:
+    """
+    Takes in monomials and outputs vector of exponents
+    """
+    var_list = list(variables)
+    idx = {v: i for i, v in enumerate(var_list)}
+    exps = [0] * len(var_list)
 
-    file_in = open("ideals/generated ideals/ideals_1.txt", "r", encoding="utf8")
+    s = m.replace(" ", "")
+    if s == "" or s == "1":
+        return exps
+
+    for f in s.split("*"):
+        if f == "" or f == "1":
+            continue
+        if "^" in f:
+            base, e = f.split("^", 1)
+            if base not in idx:
+                raise ValueError(f"unknown variable {base!r}")
+            exps[idx[base]] += int(e)
+        else:
+            if f not in idx:
+                raise ValueError(f"unknown variable {f!r}")
+            exps[idx[f]] += 1
+
+    return exps
+
+
+def str_to_matrix(ideal: list[str]):
+    """
+    takes in generators as list of monomials and converts to matrix
+
+    :param ideal_str: Description
+    :type ideal_str: str
+    """
+    return list(monomial_to_expvec(generator) for generator in ideal)
+
+
+if __name__ == "__main__":
+    # get ideals from m2
+    fin = open("ideals/generated ideals/ideals_1.txt", "r", encoding="utf8")
     all_ideals = []
-    for line in file_in:
-        ideal = clean_ideal(powers=line[7:-1], terms=file_in.readline()[7:-2])
-        print(ideal, end="\n\n")
+    for line in fin:
+        ideal = m2_to_str(powers=list(line[7:-1]), terms=list(fin.readline()[7:-2]))
+        print(ideal)
+        print(str_to_matrix(ideal), end="\n\n")
         all_ideals.append(ideal)
 
-    file_out = open("ideals/cleaned ideals/cleaned_ideals_1.txt", "a", encoding="utf8")
-    file_out.write(str(all_ideals))
+    # write cleaned ideals as text file
+    fout = open("ideals/cleaned ideals/cleaned_ideals_1.txt", "a", encoding="utf8")
+    fout.write(str(all_ideals))
