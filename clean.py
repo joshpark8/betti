@@ -2,8 +2,7 @@
 Read ideals from Macaulay2 output and encode into matrices
 """
 
-import re
-from typing import Iterable, Tuple, List
+from typing import Iterable, List
 
 
 def m2_to_str(powers: list[str], terms: list[str]):
@@ -86,8 +85,9 @@ def str_to_matrix(ideal: list[str]):
 
 
 if __name__ == "__main__":
+    n = 1
     # get ideals from m2
-    fin = open("ideals/generated ideals/ideals_1.txt", "r", encoding="utf8")
+    fin = open("ideals/generated ideals/ideals_{n}.txt", "r", encoding="utf8")
     all_ideals = []
     for line in fin:
         ideal = m2_to_str(powers=list(line[7:-1]), terms=list(fin.readline()[7:-2]))
@@ -96,5 +96,5 @@ if __name__ == "__main__":
         all_ideals.append(ideal)
 
     # write cleaned ideals as text file
-    fout = open("ideals/cleaned ideals/cleaned_ideals_1.txt", "a", encoding="utf8")
+    fout = open(f"ideals/cleaned ideals/cleaned_ideals_{n}.txt", "a", encoding="utf8")
     fout.write(str(all_ideals))

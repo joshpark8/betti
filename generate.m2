@@ -2,14 +2,14 @@
 loadPackage "RandomIdeals"
 
 -- create file object; possibly parameterize to enumerate? or run outside script to rename when cleaning
-f = "ideals/generated ideals/ideals_n.txt" << ""
+f = "ideals/generated ideals/ideals_3.txt" << ""
 
 -- define ring and list of grades of ideals
 R = QQ[x,y,z]
 L = {3,3,3,3}
 
 -- generate 50 random monomial ideals and write to file
-for i from 1 to 50 do (
+for i from 1 to 2000 do (
     I = randomMonomialIdeal(L,R);
     f << I << endl;
 )
