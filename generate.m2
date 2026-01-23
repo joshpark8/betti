@@ -7,7 +7,7 @@ needsPackage "JSON"
 f = "generated/ideals.json" << ""
 
 -- define ring
-R = ZZ[x,y]
+R = (ZZ/101)[x,y]
 
 -- define mutable hash table to pair (grobner bases of) ideals with respective betti tables
 x = new MutableHashTable
