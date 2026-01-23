@@ -111,13 +111,15 @@ if __name__ == "__main__":
     # append true height of table to ideal data
     X_base = np.asarray(ideal_vectors, dtype=float).reshape(len(ideal_vectors), -1)
 
-    # y: list of (height_i, 2) betti tables
+    # Y: list of (height_i, 2) betti tables
     heights = np.array(
         [np.asarray(B).shape[0] for B in betti_matrices], dtype=float
     ).reshape(-1, 1)
 
+    # add betti table dimension data to ideal vectors
     X = np.concatenate([X_base, heights], axis=1)  # (n, 5)
 
+    # split into training/testing sets
     Xtr, Xte, Ytr, Yte = train_test_split(X, Y, test_size=0.2, random_state=0)
 
     regressor = RandomForestRegressor(n_estimators=500, random_state=0, oob_score=True)
