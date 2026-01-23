@@ -15,7 +15,7 @@ x = new MutableHashTable
 --
 getNewIdeal = method()
 getNewIdeal(MutableHashTable) := x -> (
-    I = randomMonomialIdeal({random(1,30), random(1,30)},R);
+    I = randomMonomialIdeal({random(50,150), random(50,150)},R);
     Istr = toString gens gb I;
     if not x#?Istr then I else getNewIdeal(x)
 )
