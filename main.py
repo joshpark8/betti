@@ -8,7 +8,9 @@ import json
 import numpy as np
 
 
-def monomial_to_expvec(m: str, variables: Iterable[str] = ("x", "y", "z")) -> List[int]:
+def monomial_to_expvec(
+    m: str, variables: Iterable[str] = ("x_1", "x_2", "x_3", "x_4")
+) -> List[int]:
     """
     Takes in formatted monomials and outputs vector of exponents
 

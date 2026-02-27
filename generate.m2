@@ -3,16 +3,14 @@ needsPackage "RandomIdeals"
 needsPackage "BoijSoederberg"
 needsPackage "JSON"
 
--- number of variables
-varCount = 4
-
--- number of generators
-genCount = 3
+varCount = 4 -- number of variables
+genCount = 3 -- number of generators
+idealCount = 2000 -- number of ideals to generate
 
 -- generate uniquely identifiable file in format "ideals[# of variables],[# of generators]-[index].json"
 fileIndex = 1
 filepath = "generated/ideals"
-fileID = concatenate(toString varCount, ",", toString genCount)
+fileID = concatenate(toString varCount, "v,", toString genCount, "g,", toString idealCount, "i")
 while fileExists concatenate(filepath, fileID, "-", toString fileIndex, ".json") do (
     fileIndex += 1
 )
@@ -34,10 +32,11 @@ for i from 1 to genCount do (
 )
 
 -- generate ideals and match to betti tables
-elapsedTime for i from 1 to 1000 do (
+elapsedTime for i from 1 to idealCount do (
     I = randomMonomialIdeal({random(50,100),random(50,100),random(50,100)}, R);
     Istr = toString gens gb I;
     mhash#Istr = toString matrix betti I;
+    if i % 100 == 0 then print concatenate("completed ", toString i, " ideals");
 )
 
 finalhash = new HashTable from mhash;
