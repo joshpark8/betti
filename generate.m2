@@ -3,9 +3,12 @@ needsPackage "RandomIdeals"
 needsPackage "BoijSoederberg"
 needsPackage "JSON"
 
-varCount = 4 -- number of variables
+varCount = 3 -- number of variables
 genCount = 3 -- number of generators
-idealCount = 2000 -- number of ideals to generate
+idealCount = 100000 -- number of ideals to generate
+
+degMin = 1 -- lower bound for random degrees
+degMax = 50 -- upper bound for random degrees
 
 -- generate uniquely identifiable file in format "ideals[# of variables],[# of generators]-[index].json"
 fileIndex = 1
@@ -19,24 +22,16 @@ f = concatenate(filepath, fileID, "-", toString fileIndex, ".json") << ""
 
 -- define ring
 R = (ZZ/101)[x_1..x_(varCount)]
--- R = QQ[x,y,z]
 
 -- define mutable hash table to pair (grobner bases of) ideals with respective betti tables
 mhash = new MutableHashTable
 
--- define list of generator grades
-
-L = new MutableList
-for i from 1 to genCount do (
-    L#(i-1) = random(50,100)
-)
-
 -- generate ideals and match to betti tables
 elapsedTime for i from 1 to idealCount do (
-    I = randomMonomialIdeal({random(50,100),random(50,100),random(50,100)}, R);
+    I = randomPureBinomialIdeal({random(degMin,degMax),random(degMin,degMax),random(degMin,degMax)}, R);
     Istr = toString gens gb I;
     mhash#Istr = toString matrix betti I;
-    if i % 100 == 0 then print concatenate("completed ", toString i, " ideals");
+    if i % 500 == 0 then print concatenate(fileID,": completed ", toString i, " ideals");
 )
 
 finalhash = new HashTable from mhash;
