@@ -12,7 +12,7 @@ degMax = 50 -- upper bound for random degrees
 
 -- generate uniquely identifiable file in format "ideals[# of variables],[# of generators]-[index].json"
 fileIndex = 1
-filepath = "generated/ideals"
+filepath = "generated/binomials,"
 fileID = concatenate(toString varCount, "v,", toString genCount, "g,", toString idealCount, "i")
 while fileExists concatenate(filepath, fileID, "-", toString fileIndex, ".json") do (
     fileIndex += 1
@@ -27,11 +27,14 @@ R = (ZZ/101)[x_1..x_(varCount)]
 mhash = new MutableHashTable
 
 -- generate ideals and match to betti tables
-elapsedTime for i from 1 to idealCount do (
+startTime = currentTime();
+for i from 1 to idealCount do (
     I = randomPureBinomialIdeal({random(degMin,degMax),random(degMin,degMax),random(degMin,degMax)}, R);
-    Istr = toString gens gb I;
+    Istr = toString gens I;
     mhash#Istr = toString matrix betti I;
-    if i % 500 == 0 then print concatenate(fileID,": completed ", toString i, " ideals");
+
+    elapsed = currentTime() - startTime;
+    -- stdio << concatenate(ascii 13, fileID, "-", toString fileIndex, ": completed ", toString i, " ideals -- elapsed: ", toString elapsed, "s") << flush;
 )
 
 finalhash = new HashTable from mhash;
